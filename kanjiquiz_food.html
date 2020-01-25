@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>kanjiquiz</title>
+        <style>
+            body{font-size:16px;background-color:white;text-align: center;}
+            h1{font-size:35px;color:white;background-color:#305f72;text-align: center;}
+            .toi{font-size:23px;}
+            /* ヒントのボタン */
+            .btn{font-weight: bold;font-size:18px;width:90px;height:40px;border: solid 2px #36b5b0;color:#36b5b0;}
+            .btn:hover{background-color: #d3e2e2;}
+            /* 採点のボタン */
+            .saiten{font-weight: bold;font-size:18px;width:90px;height:40px;color:#c7004c;margin-top: 20px;border: solid 2px #c7004c;cursor :pointer;}
+            .saiten:hover{background: #e7c4d1;}
+            /* 答えのボタン */
+            .kotae{font-weight: bold;font-size:18px;width:90px;height:40px;color:#f18c8e;margin-top: 20px;border: solid 2px #f18c8e;cursor :pointer;}
+            .kotae:hover{background-color: #f5e0e0;}
+            #kiroku input{font-size:22px;}
+            .result{font-size:20px;}
+            #back{margin-top:30px;}
+            #back a{color:#305f72;text-decoration: none;}
+            .time{font-size:23px;}
+            #countdown{padding-bottom: 40px;}
+            #timer{font-size:25px;color:#c7004c;margin-bottom: 20px;}
+            /* スタートのボタン */
+            #start{padding: 13px;font-weight: bold;border: solid 2px #c7004c;cursor :pointer;text-decoration: none;color:#c7004c;}
+            #start:hover{background-color: #e9d5dc;}
+            /* 問題を表示 */
+            .hidden_box label {padding: 13px;color: #305f72;font-weight: bold;border: solid 2px #305f72;cursor :pointer;}
+            /*ボタンホバー時*/
+            .hidden_box label:hover {background: #dce2eb;}
+            /* チェックは見えなくする */
+            #label1{display: none;}
+            /*中身を非表示にしておく*/
+            .hidden_box .hidden_show {height: 0;padding: 0;overflow: hidden;opacity: 0;transition: 0.6s;}
+            /*クリックで中身表示*/
+            .hidden_box input:checked ~ .hidden_show {padding: 10px 0;height: auto;opacity: 1;}
+        </style>
+        <script>
+            // スタートがクリックされたら60秒のカウントダウンが始まる。
+            window.onload=function(){
+                    document.querySelector('#start').addEventListener('click',function(e){
+                        e.preventDefault();
+                        var count = 60;
+                        var countdown = function(){
+                            document.getElementById('timer').textContent = count.toString();
+                            console.log(count--);
+                            var id = setTimeout(countdown, 1000);
+                            if(count==0){
+                                alert("TIME UP!!")　　　// 残り時間が０になると「TIME UP」と警告される。
+                            }
+                            if(count < 0){
+                            clearTimeout(id);
+                            }
+                        }
+                    countdown();
+                    });
+                }
+            function saiten(){
+                var data={"胡瓜":"キュウリ","牛蒡":"ゴボウ","蕪":"カブ","花椰菜":"カリフラワー","甘蕉":"バナナ","甜瓜":"メロン","叉焼":"チャーシュー","麺麭":"パン","鹿尾菜":"ヒジキ","木耳":"キクラゲ"}
+                var div_node=document.querySelector("#kiroku");
+                var ans=div_node.querySelectorAll("input");
+                var key=div_node.querySelectorAll('.question')
+                var seigo=div_node.querySelectorAll('.seigo')
+                var total=0
+                for(i=0;i<10;i++)  {
+                    if (ans[i].value == data[key[i].textContent]){　
+                    total=total+10
+                    }else 
+                    ans[i].style.backgroundColor="#ffb6b9"
+                }
+                
+                msg1.textContent=total+"点";
+                if(total<=70){
+                msg2.textContent="不合格です。もう一度頑張りましょう!";
+                }else{
+                msg2.textContent="合格です!!おめでとうございます!!";
+                }
+            }
+            function kotae(){
+                var data={"胡瓜":"キュウリ","牛蒡":"ゴボウ","蕪":"カブ","花椰菜":"カリフラワー","甘蕉":"バナナ","甜瓜":"メロン","叉焼":"チャーシュー","麺麭":"パン","鹿尾菜":"ヒジキ","木耳":"キクラゲ"}
+                var div_node=document.querySelector("#kiroku");
+                var key=div_node.querySelectorAll('.question')
+
+                for(i=0;i<10;i++)  {
+                    mondai=key[i].textContent;
+                    kaitou=data[key[i].textContent];
+                    document.write('問'+(i+1)+'  '+mondai+' : '+kaitou+'<br>')
+                }
+            }
+            
+            function hint1(){
+                hi1.textContent="夏によく食べます";
+            }
+            function hint2(){
+                hi2.textContent="地味な野菜です";
+            }
+            function hint3(){
+                hi3.textContent="なかなか抜けません";
+            }
+            function hint4(){
+                hi4.textContent="緑色のものと兄弟です";
+            }
+            function hint5(){
+                hi5.textContent="ミニオンの大好物です";
+            }
+            function hint6(){
+                hi6.textContent="みずみずしいです";
+            }
+            function hint7(){
+                hi7.textContent="ラーメンには欠かせないです";
+            }
+            function hint8(){
+                hi8.textContent="主食です";
+            }
+            function hint9(){
+                hi9.textContent="眉毛です";
+            }
+            function hint10(){
+                hi10.textContent="コリコリしています";
+            }
+        </script>
+    </head>
+    <body>
+        <h1>食べ物</h1>
+        <div class="hidden_box">　
+            <div id="count_a">
+                <div class="time">Time Limit</div>
+                <div id="timer">60</div>
+                <div id="countdown">
+                <a href="" id="start" class="inactive" onclick="clickBtn1()" />スタート</a>
+            </div>
+            <label for="label1">問題を表示</label>
+            <input type="checkbox" id="label1"/>
+            <div class="hidden_show">
+                <div id="kiroku">
+                    <p>カタカナで入力してください。</p>
+                    <p class="toi">問1  <span class="question">胡瓜</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint1();">ヒント</button><p id="hi1"></p>
+                    <p class="toi">問2  <span class="question">牛蒡</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint2();">ヒント</button><p id="hi2"></p>
+                    <p class="toi">問3  <span class="question">蕪</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint3();">ヒント</button><p id="hi3"></p>
+                    <p class="toi">問4  <span class="question">花椰菜</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint4();">ヒント</button><p id="hi4"></p>
+                    <p class="toi">問5  <span class="question">甘蕉</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint5();">ヒント</button><p id="hi5"></p>
+                    <p class="toi">問6  <span class="question">甜瓜</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint6();">ヒント</button><p id="hi6"></p>
+                    <p class="toi">問7  <span class="question">叉焼</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint7();">ヒント</button><p id="hi7"></p>
+                    <p class="toi">問8  <span class="question">麺麭</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint8();">ヒント</button><p id="hi8"></p>
+                    <p class="toi">問9  <span class="question">鹿尾菜</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint9();">ヒント</button><p id="hi9"></p>
+                    <p class="toi">問10  <span class="question">木耳</span>　<input type="text"></p>
+                    <button class="btn" onclick="hint10();">ヒント</button><p id="hi10"></p>
+                </div>
+                <div class="result">
+                    <button class="saiten" onclick="saiten();">採点</button>
+                    <p id="msg1"></p><p id="msg2"></p>
+                </div>
+                <div id="kotae">
+                    <button class="kotae" onclick="kotae();">答え</button>
+                    <p id="answer"></p> 
+                </div>
+            </div>
+            <p id="back"><a href="kanjiquiz.html" onClick="history.back(); return false;">戻る</a></p>
+        </div>
+        
+    </body>
+</html>
