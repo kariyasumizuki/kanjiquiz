@@ -5,16 +5,19 @@
     <title>kanjiquiz</title>
     <style>
         body{background-color:white;}
-        .menu{align-items: center;text-align: center;}
-        h1{font-size:45px;color:white;background-color:#685454;text-align: center;}
+        .menu{align-items: center;text-align: center;display: flex;justify-content: center;}
+        h1{font-size:45px;color:white;background-color:#776c6c;text-align: center;margin: 0;padding-bottom:20px;}
         span{font-size:30px;color:white;}
-        p{font-size:23px;text-align: center;margin:30px;font-weight: bold;
+        p{font-size:23px;text-align: center;margin:30px;font-weight: bold;margin-top: 50px;margin-bottom: 10px;
         animation: flash 1s linear infinite;}
         /* 文字の点滅 */
         @keyframes flash {
             0%,100%{opacity: 0;}
             50%{opacity: 1;color:#305f72;}
         }
+        .animal{margin:4%;}
+        .food{margin:4%;}
+        .name{margin:4%;}
         img{width:230px;height:280px;}
         button{font-size:20px;width:180px;height:80px;color:#305f72;border: solid 2px ;color:#305f72;background-color:white;}
         #btn3 a{padding:11px;background-color:white;}
@@ -26,12 +29,21 @@
     <h1><span>＼ 読めたらすごい ／</span><br>漢字クイズ</h1>
     <p>メニューを選択してください</p>
     <div class="menu">
-    <img src="animal.jpg">
-    <button id="btn1" onclick="animalquiz();"><a href="kanjiquiz_animal.html">動物</a></button>
-    <img src="food.jpg">
-    <button id="btn2" onclick="foodquiz();"><a href="kanjiquiz_food.html">食べ物</a></button>
-    <img src="girl.jpg">
-    <button id="btn3" onclick="namequiz();"><a href="kanjiquiz_name.html">きらきらネーム</a></button>
+        <div class="animal">
+            <img src="animal.jpg">
+            <br>
+            <button id="btn1" onclick="animalquiz();"><a href="kanjiquiz_animal.html">動物</a></button>
+        </div>
+        <div class="food">
+            <img src="food.jpg">
+            <br>
+            <button id="btn2" onclick="foodquiz();"><a href="kanjiquiz_food.html">食べ物</a></button>
+        </div>
+        <div class="name">
+            <img src="girl.jpg">
+            <br>
+            <button id="btn3" onclick="namequiz();"><a href="kanjiquiz_name.html">きらきらネーム</a></button>
+        </div>
     </div>
 </body>
 </html>
